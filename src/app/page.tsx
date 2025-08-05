@@ -2,21 +2,11 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import ClientGalaxy from '@/components/ClientGalaxy'
 
 export default function Home() {
   return (
-    <div className="min-h-screen relative flex items-center justify-center">
-      <ClientGalaxy 
-        mouseRepulsion={true}
-        mouseInteraction={true}
-        density={1.2}
-        glowIntensity={0.4}
-        saturation={0.6}
-        hueShift={280}
-        className="absolute inset-0"
-      />
-      <div className="relative z-10 text-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+      <div className="text-center px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
