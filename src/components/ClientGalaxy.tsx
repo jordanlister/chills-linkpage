@@ -24,5 +24,5 @@ export default function ClientGalaxy(props: ClientGalaxyProps) {
     return <div className={props.className} />
   }
 
-  return <Galaxy {...props} />
+  return <Galaxy {...props} transparent={false} />
 }

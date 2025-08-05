@@ -206,7 +206,7 @@ export default function Galaxy({
   twinkleIntensity = 0.3,
   rotationSpeed = 0.1,
   autoCenterRepulsion = 0,
-  transparent = true,
+  transparent = false,
   ...rest
 }: GalaxyProps) {
   const ctnDom = useRef<HTMLDivElement>(null);
