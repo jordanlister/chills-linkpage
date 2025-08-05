@@ -3,6 +3,12 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
+
+const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
+  ssr: false,
+  loading: () => <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900" />
+})
 
 const teacherLinks = [
   { day: 1, class: "CHILLS-TAISHA MONIQUE-DIVINE FEMME", link: "https://f.io/F-WdWfk1" },
@@ -43,12 +49,21 @@ export default function Teachers() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center px-4">
+      <div className="min-h-screen relative flex items-center justify-center px-4">
+        <ClientGalaxy 
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={0.8}
+          glowIntensity={0.5}
+          saturation={0.5}
+          hueShift={200}
+          className="absolute inset-0"
+        />
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 max-w-md w-full"
+          className="relative z-10 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 max-w-md w-full"
         >
           <Link href="/" className="inline-block mb-6">
             <motion.button
@@ -106,8 +121,17 @@ export default function Teachers() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen relative py-12 px-4">
+      <ClientGalaxy 
+        mouseRepulsion={true}
+        mouseInteraction={true}
+        density={1.0}
+        glowIntensity={0.4}
+        saturation={0.6}
+        hueShift={200}
+        className="absolute inset-0"
+      />
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

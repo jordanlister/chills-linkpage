@@ -2,6 +2,12 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
+  ssr: false,
+  loading: () => <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900" />
+})
 
 const studentLinks = [
   { day: 1, class: "CHILLS-TAISHA MONIQUE-DIVINE FEMME", link: "https://f.io/fAS6wLZn" },
@@ -27,8 +33,17 @@ export default function Students() {
   }, {} as Record<number, typeof studentLinks>)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen relative py-12 px-4">
+      <ClientGalaxy 
+        mouseRepulsion={true}
+        mouseInteraction={true}
+        density={1.0}
+        glowIntensity={0.3}
+        saturation={0.7}
+        hueShift={320}
+        className="absolute inset-0"
+      />
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
