@@ -24,7 +24,7 @@ export default function ClientGalaxy(props: ClientGalaxyProps) {
   if (!mounted) {
     return (
       <motion.div 
-        className={props.className}
+        className={`${props.className} bg-black`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}

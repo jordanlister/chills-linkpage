@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
   ssr: false,
-  loading: () => <div className="min-h-screen bg-transparent" />
+  loading: () => <div className="min-h-screen bg-black" />
 })
 
 const teacherLinks = [
@@ -65,7 +65,7 @@ export default function Teachers() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen relative flex items-center justify-center px-4">
+      <div className="min-h-screen h-full relative flex items-center justify-center px-4">
         {galaxyComponent}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -129,7 +129,7 @@ export default function Teachers() {
   }
 
   return (
-    <div className="min-h-screen relative py-12 px-4">
+    <div className="min-h-screen h-full relative py-12 px-4">
       {galaxyComponent}
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div

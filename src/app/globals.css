@@ -20,12 +20,13 @@
 }
 
 html {
-  background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
+  background: #000000;
   overscroll-behavior: none;
+  height: 100%;
 }
 
 body {
-  background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
+  background: #000000;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   overscroll-behavior: none;
@@ -33,6 +34,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  height: 100%;
 }
 
 * {

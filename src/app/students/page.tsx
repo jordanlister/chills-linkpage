@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
   ssr: false,
-  loading: () => <div className="min-h-screen bg-transparent" />
+  loading: () => <div className="min-h-screen bg-black" />
 })
 
 const studentLinks = [
@@ -33,7 +33,7 @@ export default function Students() {
   }, {} as Record<number, typeof studentLinks>)
 
   return (
-    <div className="min-h-screen relative py-12 px-4">
+    <div className="min-h-screen h-full relative py-12 px-4">
       <ClientGalaxy 
         mouseRepulsion={true}
         mouseInteraction={true}

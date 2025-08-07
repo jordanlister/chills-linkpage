@@ -6,12 +6,12 @@ import dynamic from 'next/dynamic'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
   ssr: false,
-  loading: () => <div className="min-h-screen bg-transparent" />
+  loading: () => <div className="min-h-screen bg-black" />
 })
 
 export default function Home() {
   return (
-    <div className="min-h-screen relative flex items-center justify-center">
+    <div className="min-h-screen h-full relative flex items-center justify-center">
       <ClientGalaxy 
         mouseRepulsion={true}
         mouseInteraction={true}
