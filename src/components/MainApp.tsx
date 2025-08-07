@@ -154,7 +154,7 @@ export default function MainApp() {
             >
               <div className="text-center px-4">
                 <motion.div
-                  className="flex items-center justify-center gap-6 mb-8 opacity-95"
+                  className="flex flex-col items-center justify-center gap-3 mb-8 opacity-95"
                   initial={{ opacity: 0, y: isMobile ? 5 : 10 }}
                   animate={{ opacity: 0.95, y: 0 }}
                   transition={{ delay: isMobile ? 0.02 : 0.05, duration: isMobile ? 0.3 : 0.6 }}
@@ -165,7 +165,7 @@ export default function MainApp() {
                     className="w-20 h-20 md:w-24 md:h-24"
                     style={{ pointerEvents: 'none', aspectRatio: '1/1', objectFit: 'contain' }}
                   />
-                  <span className="text-white text-3xl md:text-4xl font-bold tracking-wider uppercase">
+                  <span className="text-white text-4xl md:text-5xl font-bold tracking-wider uppercase">
                     A List Creative
                   </span>
                 </motion.div>
