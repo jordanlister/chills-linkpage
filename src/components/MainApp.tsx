@@ -101,20 +101,23 @@ export default function MainApp() {
   }, [])
 
 
+  // Stable Galaxy component to prevent flickering re-renders
   const galaxyComponent = useMemo(() => (
-    <ClientGalaxy 
-      mouseRepulsion={true}
-      mouseInteraction={true}
-      density={isMobile ? 1.0 : 1.2}
-      glowIntensity={isMobile ? 0.4 : 0.5}
-      saturation={isMobile ? 0.8 : 1.0}
-      hueShift={280}
-      repulsionStrength={isMobile ? 3 : 4}
-      twinkleIntensity={0.5}
-      rotationSpeed={0.02}
-      className="absolute inset-0"
-    />
-  ), [isMobile])
+    <div className="absolute inset-0" style={{ willChange: 'auto', transform: 'translateZ(0)' }}>
+      <ClientGalaxy 
+        mouseRepulsion={true}
+        mouseInteraction={true}
+        density={1.0}
+        glowIntensity={0.3}
+        saturation={0.7}
+        hueShift={280}
+        repulsionStrength={3}
+        twinkleIntensity={0.3}
+        rotationSpeed={0.01}
+        className="absolute inset-0"
+      />
+    </div>
+  ), [])
 
   const studentGroupedByDay = useMemo(() => studentLinks.reduce((acc, item) => {
     if (!acc[item.day]) acc[item.day] = []
@@ -130,9 +133,11 @@ export default function MainApp() {
 
   return (
     <div className="min-h-screen relative">
-      {galaxyComponent}
+      <div className="fixed inset-0 z-0" style={{ isolation: 'isolate' }}>
+        {galaxyComponent}
+      </div>
       
-      <div className="relative z-20" style={{ pointerEvents: 'none' }}>
+      <div className="relative z-20 motion-container" style={{ pointerEvents: 'none', contain: 'layout style' }}>
         <AnimatePresence mode="wait">
           {currentView === 'home' && (
             <motion.div
@@ -170,20 +175,20 @@ export default function MainApp() {
                 >
                   <motion.button
                     onClick={handleStudentClick}
-                    className={`bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-full text-white font-semibold text-lg transition-colors duration-200 ${isMobile ? 'hover-disabled' : 'hover:bg-white/20'}`}
+                    className={`px-8 py-4 rounded-full text-white font-semibold text-lg ${isMobile ? 'bg-white/15 hover-disabled mobile-optimized' : 'bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors duration-200'}`}
                     style={{ pointerEvents: 'auto' }}
                     whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileTap={isMobile ? {} : { scale: 0.98 }}
                   >
                     Student Links
                   </motion.button>
 
                   <motion.button
                     onClick={handleTeacherClick}
-                    className={`bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-full text-white font-semibold text-lg transition-colors duration-200 ${isMobile ? 'hover-disabled' : 'hover:bg-white/20'}`}
+                    className={`px-8 py-4 rounded-full text-white font-semibold text-lg ${isMobile ? 'bg-white/15 hover-disabled mobile-optimized' : 'bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors duration-200'}`}
                     style={{ pointerEvents: 'auto' }}
                     whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileTap={isMobile ? {} : { scale: 0.98 }}
                   >
                     Teacher Links
                   </motion.button>

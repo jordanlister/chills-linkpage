@@ -57,7 +57,15 @@ input, textarea {
   user-select: text;
 }
 
-/* Disable hover effects on touch devices */
+/* Force GPU acceleration on mobile */
+@supports (-webkit-touch-callout: none) {
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* Mobile performance optimizations */
 @media (hover: none) and (pointer: coarse) {
   .hover-disabled {
     transition: none !important;
@@ -67,6 +75,29 @@ input, textarea {
     background-color: inherit !important;
     color: inherit !important;
     transform: none !important;
+  }
+
+  /* Disable expensive effects on mobile */
+  .backdrop-blur-sm {
+    backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* Force hardware acceleration for animations */
+  .mobile-optimized {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Disable complex gradients on mobile */
+  .mobile-gradient-disabled {
+    background: #6366f1 !important;
+  }
+
+  /* Prevent layout shifts during animations */
+  .motion-container {
+    contain: layout style paint;
   }
 }
 
