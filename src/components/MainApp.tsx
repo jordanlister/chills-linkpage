@@ -55,30 +55,39 @@ export default function MainApp() {
 
   const handleTeacherSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
-    if (password === 'Chills2025') {
-      setIsTeacherAuthenticated(true)
-      setCurrentView('teachers')
-      setShowError(false)
-    } else {
-      setShowError(true)
-      setTimeout(() => setShowError(false), 3000)
-    }
+    requestAnimationFrame(() => {
+      if (password === 'Chills2025') {
+        setIsTeacherAuthenticated(true)
+        setCurrentView('teachers')
+        setShowError(false)
+      } else {
+        setShowError(true)
+        setTimeout(() => setShowError(false), 3000)
+      }
+    })
   }, [password])
 
   const handleStudentClick = useCallback(() => {
-    setCurrentView('students')
+    // Batch state update to prevent multiple renders
+    requestAnimationFrame(() => {
+      setCurrentView('students')
+    })
   }, [])
 
   const handleTeacherClick = useCallback(() => {
-    if (isTeacherAuthenticated) {
-      setCurrentView('teachers')
-    } else {
-      setCurrentView('teacher-auth')
-    }
+    requestAnimationFrame(() => {
+      if (isTeacherAuthenticated) {
+        setCurrentView('teachers')
+      } else {
+        setCurrentView('teacher-auth')
+      }
+    })
   }, [isTeacherAuthenticated])
 
   const handleBackToHome = useCallback(() => {
-    setCurrentView('home')
+    requestAnimationFrame(() => {
+      setCurrentView('home')
+    })
   }, [])
 
   const handleLogout = useCallback(() => {
@@ -147,23 +156,33 @@ export default function MainApp() {
             <motion.div
               key="home"
               className="min-h-screen flex items-center justify-center pb-24"
-              initial={isLoaded ? { opacity: 0, y: isMobile ? 10 : 0, scale: isMobile ? 1 : 0.9 } : { opacity: 1, y: 0, scale: 1 }}
+              initial={isLoaded ? (isMobile ? { opacity: 0 } : { opacity: 0, y: 0, scale: 0.9 }) : { opacity: 1, y: 0, scale: 1 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: isMobile ? -10 : 0, scale: isMobile ? 1 : 0.9 }}
-              transition={{ duration: isLoaded ? (isMobile ? 0.3 : 0.6) : 0 }}
+              exit={isMobile ? { opacity: 0 } : { opacity: 0, y: 0, scale: 0.9 }}
+              transition={{ duration: isLoaded ? (isMobile ? 0.15 : 0.6) : 0, ease: 'easeOut' }}
+              style={{ willChange: isMobile ? 'opacity' : 'transform, opacity' }}
             >
               <div className="text-center px-4">
                 <motion.div
                   className="flex flex-col items-center justify-center gap-3 mb-8 opacity-95"
-                  initial={{ opacity: 0, y: isMobile ? 5 : 10 }}
+                  initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 10 }}
                   animate={{ opacity: 0.95, y: 0 }}
-                  transition={{ delay: isMobile ? 0.02 : 0.05, duration: isMobile ? 0.3 : 0.6 }}
+                  transition={{ delay: isMobile ? 0.05 : 0.05, duration: isMobile ? 0.15 : 0.6 }}
+                  style={{ willChange: isMobile ? 'opacity' : 'transform, opacity' }}
                 >
                   <img 
                     src="/A LIST LOGO.png" 
                     alt="A List Creative" 
                     className="w-20 h-20 md:w-24 md:h-24"
-                    style={{ pointerEvents: 'none', aspectRatio: '1/1', objectFit: 'contain' }}
+                    loading="eager"
+                    decoding="sync"
+                    style={{ 
+                      pointerEvents: 'none', 
+                      aspectRatio: '1/1', 
+                      objectFit: 'contain',
+                      transform: 'translate3d(0, 0, 0)',
+                      willChange: 'transform'
+                    }}
                   />
                   <span className="text-white text-4xl md:text-5xl font-bold tracking-wider uppercase">
                     A List Creative
@@ -172,16 +191,18 @@ export default function MainApp() {
                 
                 <motion.div
                   className="w-24 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6"
-                  initial={{ opacity: 0, scaleX: 0 }}
-                  animate={{ opacity: 1, scaleX: 1 }}
-                  transition={{ delay: isMobile ? 0.07 : 0.15, duration: isMobile ? 0.4 : 0.8 }}
+                  initial={isMobile ? { opacity: 0 } : { opacity: 0, scaleX: 0 }}
+                  animate={isMobile ? { opacity: 1 } : { opacity: 1, scaleX: 1 }}
+                  transition={{ delay: isMobile ? 0.1 : 0.15, duration: isMobile ? 0.15 : 0.8 }}
+                  style={{ willChange: isMobile ? 'opacity' : 'transform, opacity' }}
                 />
                 
                 <motion.h1
                   className="text-5xl md:text-7xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400"
-                  initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
+                  initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: isMobile ? 0.05 : 0.1, duration: isMobile ? 0.3 : 0.6 }}
+                  transition={{ delay: isMobile ? 0.15 : 0.1, duration: isMobile ? 0.15 : 0.6 }}
+                  style={{ willChange: isMobile ? 'opacity' : 'transform, opacity' }}
                 >
                   CHILLS
                 </motion.h1>

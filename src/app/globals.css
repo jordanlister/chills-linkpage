@@ -60,11 +60,25 @@ input, textarea {
   user-select: text;
 }
 
-/* Force GPU acceleration on mobile */
-@supports (-webkit-touch-callout: none) {
+/* Aggressive mobile performance optimizations */
+@media (hover: none) and (pointer: coarse) {
   * {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+    /* Force hardware acceleration */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Prevent subpixel rendering issues */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Disable all transitions on mobile */
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Re-enable only opacity transitions for critical elements */
+  .motion-safe {
+    transition: opacity 0.2s ease !important;
   }
 }
 
