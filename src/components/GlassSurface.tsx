@@ -1,4 +1,6 @@
-import { useEffect, useRef, useId } from "react";
+'use client'
+
+import { useEffect, useRef, useId, useState } from "react";
 import "./GlassSurface.css";
 
 const GlassSurface = ({
@@ -145,18 +147,15 @@ const GlassSurface = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, height]);
 
+  const [isBrowser, setIsBrowser] = useState(false);
+  
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
   const supportsSVGFilters = (): boolean => {
-    const isWebkit =
-      /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-    const isFirefox = /Firefox/.test(navigator.userAgent);
-
-    if (isWebkit || isFirefox) {
-      return false;
-    }
-
-    const div = document.createElement("div");
-    div.style.backdropFilter = `url(#${filterId})`;
-    return div.style.backdropFilter !== "";
+    // For now, always use fallback to ensure buttons are visible with glass effect
+    return false;
   };
 
   const containerStyle = {

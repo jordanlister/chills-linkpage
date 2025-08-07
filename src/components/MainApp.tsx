@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+
 import GlassSurface from './GlassSurface'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
@@ -230,17 +231,18 @@ export default function MainApp() {
                   transition={{ delay: isMobile ? 0.15 : 0.3, duration: isMobile ? 0.3 : 0.6 }}
                 >
                   <GlassSurface
-                    width="auto"
+                    width={240}
                     height={60}
                     borderRadius={30}
-                    brightness={20}
-                    opacity={0.8}
-                    className="min-w-48"
+                    className="min-w-60"
                   >
                     <motion.button
                       onClick={handleStudentClick}
-                      className="w-full h-full px-8 py-4 text-white font-semibold text-lg"
-                      style={{ pointerEvents: 'auto' }}
+                      className="w-full h-full px-8 py-4 text-white font-bold text-lg flex items-center justify-center whitespace-nowrap"
+                      style={{ 
+                        pointerEvents: 'auto',
+                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.8)'
+                      }}
                       whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
                       whileTap={isMobile ? {} : { scale: 0.98 }}
                     >
@@ -249,17 +251,18 @@ export default function MainApp() {
                   </GlassSurface>
 
                   <GlassSurface
-                    width="auto"
+                    width={240}
                     height={60}
                     borderRadius={30}
-                    brightness={20}
-                    opacity={0.8}
-                    className="min-w-48"
+                    className="min-w-60"
                   >
                     <motion.button
                       onClick={handleTeacherClick}
-                      className="w-full h-full px-8 py-4 text-white font-semibold text-lg"
-                      style={{ pointerEvents: 'auto' }}
+                      className="w-full h-full px-8 py-4 text-white font-bold text-lg flex items-center justify-center whitespace-nowrap"
+                      style={{ 
+                        pointerEvents: 'auto',
+                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.8)'
+                      }}
                       whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
                       whileTap={isMobile ? {} : { scale: 0.98 }}
                     >
