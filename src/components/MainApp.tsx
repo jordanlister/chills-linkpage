@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
   ssr: false,
@@ -170,15 +171,15 @@ export default function MainApp() {
                   transition={{ delay: isMobile ? 0.05 : 0.05, duration: isMobile ? 0.15 : 0.6 }}
                   style={{ willChange: isMobile ? 'opacity' : 'transform, opacity' }}
                 >
-                  <img 
+                  <Image 
                     src="/A LIST LOGO.png" 
                     alt="A List Creative" 
+                    width={96}
+                    height={96}
+                    priority
                     className="w-20 h-20 md:w-24 md:h-24"
-                    loading="eager"
-                    decoding="sync"
                     style={{ 
                       pointerEvents: 'none', 
-                      aspectRatio: '1/1', 
                       objectFit: 'contain',
                       transform: 'translate3d(0, 0, 0)',
                       willChange: 'transform'
