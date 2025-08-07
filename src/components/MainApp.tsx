@@ -170,6 +170,13 @@ export default function MainApp() {
                   </span>
                 </motion.div>
                 
+                <motion.div
+                  className="w-24 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6"
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  animate={{ opacity: 1, scaleX: 1 }}
+                  transition={{ delay: isMobile ? 0.07 : 0.15, duration: isMobile ? 0.4 : 0.8 }}
+                />
+                
                 <motion.h1
                   className="text-5xl md:text-7xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400"
                   initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
