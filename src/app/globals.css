@@ -41,3 +41,15 @@ body {
 * {
   transition: opacity 0.3s ease;
 }
+
+/* Ensure Galaxy background extends beyond viewport */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
+  z-index: -2;
+}

@@ -1,20 +1,18 @@
 .galaxy-container {
   width: 100vw;
-  height: 100vh;
-  min-height: 100vh;
+  height: 300vh;
+  min-height: 300vh;
   overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
+  z-index: -1;
 }
 
 .galaxy-container canvas {
   width: 100vw !important;
-  height: 100vh !important;
-  min-height: 100vh !important;
+  height: 300vh !important;
+  min-height: 300vh !important;
   display: block;
   background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
   mix-blend-mode: normal;
@@ -24,5 +22,5 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: -1;
 }
