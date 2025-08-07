@@ -49,13 +49,7 @@ export default function Teachers() {
 
   if (!isAuthenticated) {
     return (
-      <motion.div 
-        className="min-h-screen relative flex items-center justify-center px-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <div className="min-h-screen relative flex items-center justify-center px-4">
         <ClientGalaxy 
           mouseRepulsion={true}
           mouseInteraction={true}
@@ -122,18 +116,12 @@ export default function Teachers() {
           </form>
 
         </motion.div>
-      </motion.div>
+      </div>
     )
   }
 
   return (
-    <motion.div 
-      className="min-h-screen relative py-12 px-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="min-h-screen relative py-12 px-4">
       <ClientGalaxy 
         mouseRepulsion={true}
         mouseInteraction={true}
@@ -231,6 +219,6 @@ export default function Teachers() {
         ))}
 
       </div>
-    </motion.div>
+    </div>
   )
 }

@@ -11,13 +11,7 @@ const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
 
 export default function Home() {
   return (
-    <motion.div 
-      className="min-h-screen relative flex items-center justify-center"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="min-h-screen relative flex items-center justify-center">
       <ClientGalaxy 
         mouseRepulsion={true}
         mouseInteraction={true}
@@ -80,6 +74,6 @@ export default function Home() {
         </motion.div>
 
       </div>
-    </motion.div>
+    </div>
   )
 }

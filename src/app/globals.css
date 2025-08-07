@@ -19,18 +19,22 @@
   }
 }
 
+html {
+  background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
+  overscroll-behavior: none;
+}
+
 body {
   background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   overscroll-behavior: none;
   overflow-x: hidden;
-}
-
-html {
-  overscroll-behavior: none;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 * {
-  transition: background-color 0.3s ease, opacity 0.3s ease;
+  transition: opacity 0.3s ease;
 }

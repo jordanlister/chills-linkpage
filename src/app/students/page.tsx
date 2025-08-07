@@ -33,13 +33,7 @@ export default function Students() {
   }, {} as Record<number, typeof studentLinks>)
 
   return (
-    <motion.div 
-      className="min-h-screen relative py-12 px-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="min-h-screen relative py-12 px-4">
       <ClientGalaxy 
         mouseRepulsion={true}
         mouseInteraction={true}
@@ -127,6 +121,6 @@ export default function Students() {
         ))}
 
       </div>
-    </motion.div>
+    </div>
   )
 }
