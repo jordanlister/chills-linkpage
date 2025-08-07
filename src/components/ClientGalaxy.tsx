@@ -11,6 +11,9 @@ interface ClientGalaxyProps {
   glowIntensity?: number;
   saturation?: number;
   hueShift?: number;
+  repulsionStrength?: number;
+  twinkleIntensity?: number;
+  rotationSpeed?: number;
   className?: string;
 }
 
