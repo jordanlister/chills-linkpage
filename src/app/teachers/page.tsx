@@ -65,7 +65,7 @@ export default function Teachers() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen h-full relative flex items-center justify-center px-4">
+      <div className="min-h-screen relative flex items-center justify-center px-4 pb-24">
         {galaxyComponent}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -129,12 +129,12 @@ export default function Teachers() {
   }
 
   return (
-    <div className="min-h-screen h-full relative py-12 px-4">
+    <div className="min-h-screen relative py-12 px-4 pb-24">
       {galaxyComponent}
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
@@ -168,8 +168,8 @@ export default function Teachers() {
         {Object.entries(groupedByDay).map(([day, classes]) => (
           <motion.div
             key={day}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: parseInt(day) * 0.1 }}
             className="mb-12"
           >
@@ -187,9 +187,9 @@ export default function Teachers() {
                   className="block bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 group w-48 flex-shrink-0"
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (parseInt(day) - 1) * 0.1 + index * 0.05 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: (parseInt(day) - 1) * 0.1 + index * 0.05, duration: 0.6 }}
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-sm">

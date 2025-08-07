@@ -11,7 +11,7 @@ const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
 
 export default function Home() {
   return (
-    <div className="min-h-screen h-full relative flex items-center justify-center">
+    <div className="min-h-screen relative flex items-center justify-center pb-24">
       <ClientGalaxy 
         mouseRepulsion={true}
         mouseInteraction={true}
@@ -23,33 +23,33 @@ export default function Home() {
       />
       <div className="relative z-10 text-center px-4">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
         >
           <motion.h1
             className="text-6xl md:text-8xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
           >
             CHILLS
           </motion.h1>
           
           <motion.p
             className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
           >
             Access your dance camp videos
           </motion.p>
 
           <motion.div
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
           >
             <Link href="/students">
               <motion.button
