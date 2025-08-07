@@ -154,24 +154,24 @@ export default function MainApp() {
             >
               <div className="text-center px-4">
                 <motion.div
-                  className="flex items-center justify-center gap-5 mb-8 opacity-90"
+                  className="flex items-center justify-center gap-6 mb-8 opacity-95"
                   initial={{ opacity: 0, y: isMobile ? 5 : 10 }}
-                  animate={{ opacity: 0.9, y: 0 }}
+                  animate={{ opacity: 0.95, y: 0 }}
                   transition={{ delay: isMobile ? 0.02 : 0.05, duration: isMobile ? 0.3 : 0.6 }}
                 >
                   <img 
                     src="/A LIST LOGO.png" 
                     alt="A List Creative" 
-                    className="w-16 h-16 md:w-20 md:h-20"
-                    style={{ pointerEvents: 'none' }}
+                    className="w-20 h-20 md:w-24 md:h-24"
+                    style={{ pointerEvents: 'none', aspectRatio: '1/1', objectFit: 'contain' }}
                   />
-                  <span className="text-white text-2xl md:text-3xl font-bold tracking-wider uppercase">
+                  <span className="text-white text-3xl md:text-4xl font-bold tracking-wider uppercase">
                     A List Creative
                   </span>
                 </motion.div>
                 
                 <motion.h1
-                  className="text-6xl md:text-8xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400"
+                  className="text-5xl md:text-7xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400"
                   initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: isMobile ? 0.05 : 0.1, duration: isMobile ? 0.3 : 0.6 }}
