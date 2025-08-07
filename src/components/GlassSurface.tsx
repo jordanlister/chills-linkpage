@@ -1,9 +1,50 @@
 'use client'
 
-import { useEffect, useRef, useId, useState } from "react";
+import React, { useEffect, useRef, useId, useState } from "react";
 import "./GlassSurface.css";
 
-const GlassSurface = ({
+export interface GlassSurfaceProps {
+  children?: React.ReactNode;
+  width?: number | string;
+  height?: number | string;
+  borderRadius?: number;
+  borderWidth?: number;
+  brightness?: number;
+  opacity?: number;
+  blur?: number;
+  displace?: number;
+  backgroundOpacity?: number;
+  saturation?: number;
+  distortionScale?: number;
+  redOffset?: number;
+  greenOffset?: number;
+  blueOffset?: number;
+  xChannel?: "R" | "G" | "B";
+  yChannel?: "R" | "G" | "B";
+  mixBlendMode?:
+    | "normal"
+    | "multiply"
+    | "screen"
+    | "overlay"
+    | "darken"
+    | "lighten"
+    | "color-dodge"
+    | "color-burn"
+    | "hard-light"
+    | "soft-light"
+    | "difference"
+    | "exclusion"
+    | "hue"
+    | "saturation"
+    | "color"
+    | "luminosity"
+    | "plus-darker"
+    | "plus-lighter";
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const GlassSurface: React.FC<GlassSurfaceProps> = ({
   children,
   width = 200,
   height = 80,
@@ -24,32 +65,11 @@ const GlassSurface = ({
   mixBlendMode = "difference",
   className = "",
   style = {},
-}: {
-  children: React.ReactNode;
-  width?: number | string;
-  height?: number | string;
-  borderRadius?: number;
-  borderWidth?: number;
-  brightness?: number;
-  opacity?: number;
-  blur?: number;
-  displace?: number;
-  backgroundOpacity?: number;
-  saturation?: number;
-  distortionScale?: number;
-  redOffset?: number;
-  greenOffset?: number;
-  blueOffset?: number;
-  xChannel?: string;
-  yChannel?: string;
-  mixBlendMode?: string;
-  className?: string;
-  style?: React.CSSProperties;
 }) => {
-  const uniqueId = useId().replace(/:/g, '-');
-  const filterId = `glass-filter-${uniqueId}`;
-  const redGradId = `red-grad-${uniqueId}`;
-  const blueGradId = `blue-grad-${uniqueId}`;
+  const id = useId();
+  const filterId = `glass-filter-${id}`;
+  const redGradId = `red-grad-${id}`;
+  const blueGradId = `blue-grad-${id}`;
   
   const containerRef = useRef<HTMLDivElement>(null);
   const feImageRef = useRef<SVGFEImageElement>(null);
@@ -108,7 +128,6 @@ const GlassSurface = ({
     });
 
     gaussianBlurRef.current?.setAttribute("stdDeviation", displace.toString());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     width,
     height,
@@ -139,26 +158,38 @@ const GlassSurface = ({
     return () => {
       resizeObserver.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      setTimeout(updateDisplacementMap, 0);
+    });
+
+    resizeObserver.observe(containerRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, []);
 
   useEffect(() => {
     setTimeout(updateDisplacementMap, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, height]);
 
-  const [isBrowser, setIsBrowser] = useState(false);
-  
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
-    setIsBrowser(true);
+    setIsMounted(true);
   }, []);
 
-  const supportsSVGFilters = (): boolean => {
-    // For now, always use fallback to ensure buttons are visible with glass effect
+  const supportsSVGFilters = () => {
+    // Always use fallback for now to ensure buttons are visible
     return false;
   };
 
-  const containerStyle = {
+  const containerStyle: React.CSSProperties = {
     ...style,
     width: typeof width === "number" ? `${width}px` : width,
     height: typeof height === "number" ? `${height}px` : height,
@@ -166,7 +197,13 @@ const GlassSurface = ({
     "--glass-frost": backgroundOpacity,
     "--glass-saturation": saturation,
     "--filter-id": `url(#${filterId})`,
-  } as React.CSSProperties & { [key: string]: any };
+    // Force glass styles to always be applied
+    background: "rgba(255, 255, 255, 0.15)",
+    backdropFilter: "blur(20px) saturate(1.8) brightness(1.1)",
+    WebkitBackdropFilter: "blur(20px) saturate(1.8) brightness(1.1)",
+    border: "1px solid rgba(255, 255, 255, 0.3)",
+    boxShadow: "inset 0 1px 0 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 0 rgba(255, 255, 255, 0.1)",
+  } as React.CSSProperties;
 
   return (
     <div
