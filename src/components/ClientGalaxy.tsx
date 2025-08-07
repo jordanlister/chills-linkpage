@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import Galaxy from './Galaxy'
 
 interface ClientGalaxyProps {
@@ -21,8 +22,24 @@ export default function ClientGalaxy(props: ClientGalaxyProps) {
   }, [])
 
   if (!mounted) {
-    return <div className={props.className} />
+    return (
+      <motion.div 
+        className={props.className}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      />
+    )
   }
 
-  return <Galaxy {...props} transparent={false} />
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className={props.className}
+    >
+      <Galaxy {...props} transparent={false} />
+    </motion.div>
+  )
 }

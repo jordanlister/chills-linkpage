@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
   ssr: false,
-  loading: () => <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900" />
+  loading: () => <div className="min-h-screen bg-transparent" />
 })
 
 const teacherLinks = [
@@ -49,7 +49,13 @@ export default function Teachers() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen relative flex items-center justify-center px-4">
+      <motion.div 
+        className="min-h-screen relative flex items-center justify-center px-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <ClientGalaxy 
           mouseRepulsion={true}
           mouseInteraction={true}
@@ -116,12 +122,18 @@ export default function Teachers() {
           </form>
 
         </motion.div>
-      </div>
+      </motion.div>
     )
   }
 
   return (
-    <div className="min-h-screen relative py-12 px-4">
+    <motion.div 
+      className="min-h-screen relative py-12 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <ClientGalaxy 
         mouseRepulsion={true}
         mouseInteraction={true}
@@ -219,6 +231,6 @@ export default function Teachers() {
         ))}
 
       </div>
-    </div>
+    </motion.div>
   )
 }

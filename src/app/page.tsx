@@ -6,12 +6,18 @@ import dynamic from 'next/dynamic'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
   ssr: false,
-  loading: () => <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900" />
+  loading: () => <div className="min-h-screen bg-transparent" />
 })
 
 export default function Home() {
   return (
-    <div className="min-h-screen relative flex items-center justify-center">
+    <motion.div 
+      className="min-h-screen relative flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <ClientGalaxy 
         mouseRepulsion={true}
         mouseInteraction={true}
@@ -74,6 +80,6 @@ export default function Home() {
         </motion.div>
 
       </div>
-    </div>
+    </motion.div>
   )
 }
