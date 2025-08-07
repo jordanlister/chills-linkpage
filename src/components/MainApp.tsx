@@ -47,6 +47,7 @@ export default function MainApp() {
   const [isTeacherAuthenticated, setIsTeacherAuthenticated] = useState(false)
   const [showError, setShowError] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
@@ -86,7 +87,7 @@ export default function MainApp() {
     setCurrentView('home')
   }, [])
 
-  // Detect mobile device on client side
+  // Detect mobile device and set loaded state
   useEffect(() => {
     const detectMobile = () => {
       const userAgentMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -96,6 +97,9 @@ export default function MainApp() {
     
     detectMobile()
     window.addEventListener('resize', detectMobile)
+    
+    // Set loaded after a brief delay to prevent initial render flash
+    setTimeout(() => setIsLoaded(true), 100)
     
     return () => window.removeEventListener('resize', detectMobile)
   }, [])
@@ -132,8 +136,8 @@ export default function MainApp() {
   }, {} as Record<number, typeof teacherLinks>), [])
 
   return (
-    <div className="min-h-screen relative">
-      <div className="fixed inset-0 z-0" style={{ isolation: 'isolate' }}>
+    <div className="min-h-screen relative bg-black" style={{ backgroundColor: '#000000' }}>
+      <div className="fixed inset-0 z-0 bg-black" style={{ isolation: 'isolate', backgroundColor: '#000000' }}>
         {galaxyComponent}
       </div>
       
@@ -143,10 +147,10 @@ export default function MainApp() {
             <motion.div
               key="home"
               className="min-h-screen flex items-center justify-center pb-24"
-              initial={{ opacity: 0, y: isMobile ? 10 : 0, scale: isMobile ? 1 : 0.9 }}
+              initial={isLoaded ? { opacity: 0, y: isMobile ? 10 : 0, scale: isMobile ? 1 : 0.9 } : { opacity: 1, y: 0, scale: 1 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: isMobile ? -10 : 0, scale: isMobile ? 1 : 0.9 }}
-              transition={{ duration: isMobile ? 0.3 : 0.6 }}
+              transition={{ duration: isLoaded ? (isMobile ? 0.3 : 0.6) : 0 }}
             >
               <div className="text-center px-4">
                 <motion.h1

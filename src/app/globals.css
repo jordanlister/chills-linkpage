@@ -19,8 +19,10 @@
   }
 }
 
+/* Immediate black background to prevent FOUC */
 html {
-  background: #000000;
+  background: #000000 !important;
+  background-color: #000000 !important;
   overscroll-behavior: none !important;
   -webkit-overscroll-behavior: none !important;
   height: 100%;
@@ -29,7 +31,8 @@ html {
 }
 
 body {
-  background: #000000;
+  background: #000000 !important;
+  background-color: #000000 !important;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   overscroll-behavior: none !important;
