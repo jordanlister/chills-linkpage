@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
@@ -30,7 +30,11 @@ export default function Teachers() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [showError, setShowError] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value)
+  }, [])
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
     if (password === 'Chills2025') {
       setIsAuthenticated(true)
@@ -39,26 +43,30 @@ export default function Teachers() {
       setShowError(true)
       setTimeout(() => setShowError(false), 3000)
     }
-  }
+  }, [password])
 
-  const groupedByDay = teacherLinks.reduce((acc, item) => {
+  const groupedByDay = useMemo(() => teacherLinks.reduce((acc, item) => {
     if (!acc[item.day]) acc[item.day] = []
     acc[item.day].push(item)
     return acc
-  }, {} as Record<number, typeof teacherLinks>)
+  }, {} as Record<number, typeof teacherLinks>), [])
+
+  const galaxyComponent = useMemo(() => (
+    <ClientGalaxy 
+      mouseRepulsion={true}
+      mouseInteraction={true}
+      density={0.8}
+      glowIntensity={0.5}
+      saturation={0.5}
+      hueShift={200}
+      className="absolute inset-0"
+    />
+  ), [])
 
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen relative flex items-center justify-center px-4">
-        <ClientGalaxy 
-          mouseRepulsion={true}
-          mouseInteraction={true}
-          density={0.8}
-          glowIntensity={0.5}
-          saturation={0.5}
-          hueShift={200}
-          className="absolute inset-0"
-        />
+        {galaxyComponent}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -89,7 +97,7 @@ export default function Teachers() {
               <input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
                 placeholder="Enter password"
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 autoFocus
@@ -122,15 +130,7 @@ export default function Teachers() {
 
   return (
     <div className="min-h-screen relative py-12 px-4">
-      <ClientGalaxy 
-        mouseRepulsion={true}
-        mouseInteraction={true}
-        density={1.0}
-        glowIntensity={0.4}
-        saturation={0.6}
-        hueShift={200}
-        className="absolute inset-0"
-      />
+      {galaxyComponent}
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
