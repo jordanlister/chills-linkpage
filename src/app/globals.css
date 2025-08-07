@@ -49,8 +49,8 @@ body::before {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 500vh;
-  min-height: 500vh;
+  height: 300vh;
+  min-height: 300vh;
   background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
   z-index: -2;
 }
@@ -62,8 +62,26 @@ html::before {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 500vh;
-  min-height: 500vh;
+  height: 300vh;
+  min-height: 300vh;
   background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
   z-index: -3;
+}
+
+/* Mobile optimization - smaller fallback heights */
+@media (max-width: 768px) {
+  body::before {
+    height: 200vh;
+    min-height: 200vh;
+    /* Better mobile performance */
+    will-change: auto;
+    backface-visibility: hidden;
+  }
+  
+  html::before {
+    height: 200vh;
+    min-height: 200vh;
+    will-change: auto;
+    backface-visibility: hidden;
+  }
 }

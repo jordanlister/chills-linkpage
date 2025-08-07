@@ -46,6 +46,7 @@ export default function MainApp() {
   const [password, setPassword] = useState('')
   const [isTeacherAuthenticated, setIsTeacherAuthenticated] = useState(false)
   const [showError, setShowError] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
@@ -85,17 +86,31 @@ export default function MainApp() {
     setCurrentView('home')
   }, [])
 
+  // Detect mobile device on client side
+  useEffect(() => {
+    const detectMobile = () => {
+      const userAgentMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      const screenSizeMobile = window.innerWidth <= 768
+      setIsMobile(userAgentMobile || screenSizeMobile)
+    }
+    
+    detectMobile()
+    window.addEventListener('resize', detectMobile)
+    
+    return () => window.removeEventListener('resize', detectMobile)
+  }, [])
+
   const galaxyComponent = useMemo(() => (
     <ClientGalaxy 
-      mouseRepulsion={true}
-      mouseInteraction={true}
-      density={1.2}
-      glowIntensity={0.4}
-      saturation={0.6}
+      mouseRepulsion={!isMobile}
+      mouseInteraction={!isMobile}
+      density={isMobile ? 0.8 : 1.2}
+      glowIntensity={isMobile ? 0.2 : 0.4}
+      saturation={isMobile ? 0.4 : 0.6}
       hueShift={280}
       className="absolute inset-0"
     />
-  ), [])
+  ), [isMobile])
 
   const studentGroupedByDay = useMemo(() => studentLinks.reduce((acc, item) => {
     if (!acc[item.day]) acc[item.day] = []

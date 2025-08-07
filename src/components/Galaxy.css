@@ -1,7 +1,7 @@
 .galaxy-container {
   width: 100vw;
-  height: 500vh;
-  min-height: 500vh;
+  height: 300vh;
+  min-height: 300vh;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -11,8 +11,8 @@
 
 .galaxy-container canvas {
   width: 100vw !important;
-  height: 500vh !important;
-  min-height: 500vh !important;
+  height: 300vh !important;
+  min-height: 300vh !important;
   display: block;
   background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
   mix-blend-mode: normal;
@@ -23,4 +23,20 @@
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+/* Mobile optimization - smaller Galaxy height for better performance */
+@media (max-width: 768px) {
+  .galaxy-container {
+    height: 200vh;
+    min-height: 200vh;
+  }
+  
+  .galaxy-container canvas {
+    height: 200vh !important;
+    min-height: 200vh !important;
+    /* Better mobile performance */
+    will-change: auto;
+    backface-visibility: hidden;
+  }
 }
