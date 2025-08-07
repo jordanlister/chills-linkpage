@@ -1,42 +1,40 @@
 .galaxy-container {
   width: 100vw;
-  height: 300vh;
-  min-height: 300vh;
+  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
+  touch-action: none;
+  pointer-events: auto;
 }
 
 .galaxy-container canvas {
   width: 100vw !important;
-  height: 300vh !important;
-  min-height: 300vh !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
   display: block;
   background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
   mix-blend-mode: normal;
-  /* Prevent color inversion on Safari/mobile */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  /* Enhanced Safari/Android color inversion protection */
+  -webkit-transform: translateZ(0) translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  -webkit-filter: none !important;
+  -webkit-appearance: none;
+  transform: translateZ(0) translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  filter: none !important;
+  image-rendering: auto;
+  image-rendering: optimizeQuality;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
-}
-
-/* Mobile optimization - smaller Galaxy height for better performance */
-@media (max-width: 768px) {
-  .galaxy-container {
-    height: 200vh;
-    min-height: 200vh;
-  }
-  
-  .galaxy-container canvas {
-    height: 200vh !important;
-    min-height: 200vh !important;
-    /* Better mobile performance */
-    will-change: auto;
-    backface-visibility: hidden;
-  }
+  z-index: 0;
+  /* Prevent any forced color scheme changes */
+  color-scheme: none;
+  forced-color-adjust: none;
+  touch-action: none;
+  pointer-events: auto;
 }

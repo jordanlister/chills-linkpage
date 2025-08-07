@@ -100,14 +100,18 @@ export default function MainApp() {
     return () => window.removeEventListener('resize', detectMobile)
   }, [])
 
+
   const galaxyComponent = useMemo(() => (
     <ClientGalaxy 
-      mouseRepulsion={!isMobile}
-      mouseInteraction={!isMobile}
-      density={isMobile ? 0.8 : 1.2}
-      glowIntensity={isMobile ? 0.2 : 0.4}
-      saturation={isMobile ? 0.4 : 0.6}
+      mouseRepulsion={true}
+      mouseInteraction={true}
+      density={isMobile ? 1.0 : 1.2}
+      glowIntensity={isMobile ? 0.4 : 0.5}
+      saturation={isMobile ? 0.8 : 1.0}
       hueShift={280}
+      repulsionStrength={isMobile ? 3 : 4}
+      twinkleIntensity={0.5}
+      rotationSpeed={0.02}
       className="absolute inset-0"
     />
   ), [isMobile])
@@ -128,7 +132,7 @@ export default function MainApp() {
     <div className="min-h-screen relative">
       {galaxyComponent}
       
-      <div className="relative z-10">
+      <div className="relative z-20" style={{ pointerEvents: 'none' }}>
         <AnimatePresence mode="wait">
           {currentView === 'home' && (
             <motion.div
@@ -167,6 +171,7 @@ export default function MainApp() {
                   <motion.button
                     onClick={handleStudentClick}
                     className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 px-8 py-4 rounded-full text-white font-semibold text-lg transition-all duration-300"
+                    style={{ pointerEvents: 'auto' }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -176,6 +181,7 @@ export default function MainApp() {
                   <motion.button
                     onClick={handleTeacherClick}
                     className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 px-8 py-4 rounded-full text-white font-semibold text-lg transition-all duration-300"
+                    style={{ pointerEvents: 'auto' }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -205,6 +211,7 @@ export default function MainApp() {
                   <motion.button
                     onClick={handleBackToHome}
                     className="text-white/70 hover:text-white flex items-center gap-2 transition-colors mb-8 mx-auto"
+                    style={{ pointerEvents: 'auto' }}
                     whileHover={{ x: -5 }}
                   >
                     ← Back to Home
@@ -238,6 +245,7 @@ export default function MainApp() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="block bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 group w-48 flex-shrink-0"
+                          style={{ pointerEvents: 'auto' }}
                           whileHover={{ scale: 1.02, y: -5 }}
                           whileTap={{ scale: 0.98 }}
                           initial={{ opacity: 0, scale: 0.9 }}
@@ -288,6 +296,7 @@ export default function MainApp() {
                 <motion.button
                   onClick={handleBackToHome}
                   className="text-white/70 hover:text-white flex items-center gap-2 transition-colors mb-6"
+                  style={{ pointerEvents: 'auto' }}
                   whileHover={{ x: -5 }}
                 >
                   ← Back to Home
@@ -306,6 +315,7 @@ export default function MainApp() {
                       onChange={handlePasswordChange}
                       placeholder="Enter password"
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      style={{ pointerEvents: 'auto' }}
                       autoFocus
                     />
                     {showError && (
@@ -322,6 +332,7 @@ export default function MainApp() {
                   <motion.button
                     type="submit"
                     className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 px-6 py-3 rounded-lg text-white font-semibold transition-all duration-200"
+                    style={{ pointerEvents: 'auto' }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -352,6 +363,7 @@ export default function MainApp() {
                     <motion.button
                       onClick={handleBackToHome}
                       className="text-white/70 hover:text-white flex items-center gap-2 transition-colors"
+                      style={{ pointerEvents: 'auto' }}
                       whileHover={{ x: -5 }}
                     >
                       ← Back to Home
@@ -360,6 +372,7 @@ export default function MainApp() {
                     <motion.button
                       onClick={handleLogout}
                       className="text-white/70 hover:text-white text-sm transition-colors"
+                      style={{ pointerEvents: 'auto' }}
                       whileHover={{ scale: 1.05 }}
                     >
                       Logout
@@ -394,6 +407,7 @@ export default function MainApp() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="block bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 group w-48 flex-shrink-0"
+                          style={{ pointerEvents: 'auto' }}
                           whileHover={{ scale: 1.02, y: -5 }}
                           whileTap={{ scale: 0.98 }}
                           initial={{ opacity: 0, scale: 0.9 }}

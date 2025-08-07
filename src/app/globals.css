@@ -21,67 +21,33 @@
 
 html {
   background: #000000;
-  overscroll-behavior: none;
+  overscroll-behavior: none !important;
+  -webkit-overscroll-behavior: none !important;
   height: 100%;
   min-height: 100vh;
+  touch-action: pan-y;
 }
 
 body {
   background: #000000;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  overscroll-behavior: none;
+  overscroll-behavior: none !important;
+  -webkit-overscroll-behavior: none !important;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
   min-height: 100vh;
   position: relative;
+  touch-action: pan-y;
 }
 
 * {
   transition: opacity 0.3s ease;
 }
 
-/* Ensure Galaxy background extends beyond viewport */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 300vh;
-  min-height: 300vh;
-  background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
-  z-index: -2;
-}
-
-/* Additional fallback for any potential gaps */
-html::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 300vh;
-  min-height: 300vh;
-  background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
-  z-index: -3;
-}
-
-/* Mobile optimization - smaller fallback heights */
-@media (max-width: 768px) {
-  body::before {
-    height: 200vh;
-    min-height: 200vh;
-    /* Better mobile performance */
-    will-change: auto;
-    backface-visibility: hidden;
-  }
-  
-  html::before {
-    height: 200vh;
-    min-height: 200vh;
-    will-change: auto;
-    backface-visibility: hidden;
-  }
+/* Prevent any scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }

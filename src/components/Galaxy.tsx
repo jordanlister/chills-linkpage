@@ -322,13 +322,30 @@ export default function Galaxy({
       targetMouseActive.current = 1.0;
     }
 
+    function handleTouchMove(e: TouchEvent) {
+      e.preventDefault();
+      const rect = ctn.getBoundingClientRect();
+      const touch = e.touches[0];
+      const x = (touch.clientX - rect.left) / rect.width;
+      const y = 1.0 - (touch.clientY - rect.top) / rect.height;
+      targetMousePos.current = { x, y };
+      targetMouseActive.current = 1.0;
+    }
+
     function handleMouseLeave() {
+      targetMouseActive.current = 0.0;
+    }
+
+    function handleTouchEnd() {
       targetMouseActive.current = 0.0;
     }
 
     if (mouseInteraction) {
       ctn.addEventListener("mousemove", handleMouseMove);
       ctn.addEventListener("mouseleave", handleMouseLeave);
+      ctn.addEventListener("touchmove", handleTouchMove, { passive: false });
+      ctn.addEventListener("touchend", handleTouchEnd);
+      ctn.addEventListener("touchcancel", handleTouchEnd);
     }
 
     return () => {
@@ -337,6 +354,9 @@ export default function Galaxy({
       if (mouseInteraction) {
         ctn.removeEventListener("mousemove", handleMouseMove);
         ctn.removeEventListener("mouseleave", handleMouseLeave);
+        ctn.removeEventListener("touchmove", handleTouchMove);
+        ctn.removeEventListener("touchend", handleTouchEnd);
+        ctn.removeEventListener("touchcancel", handleTouchEnd);
       }
       if (ctn.contains(gl.canvas)) {
         ctn.removeChild(gl.canvas);
