@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import GlassSurface from './GlassSurface'
 
 const ClientGalaxy = dynamic(() => import('@/components/ClientGalaxy'), {
   ssr: false,
@@ -228,25 +229,43 @@ export default function MainApp() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: isMobile ? 0.15 : 0.3, duration: isMobile ? 0.3 : 0.6 }}
                 >
-                  <motion.button
-                    onClick={handleStudentClick}
-                    className={`px-8 py-4 rounded-full text-white font-semibold text-lg ${isMobile ? 'bg-white/15 hover-disabled mobile-optimized' : 'bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors duration-200'}`}
-                    style={{ pointerEvents: 'auto' }}
-                    whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
-                    whileTap={isMobile ? {} : { scale: 0.98 }}
+                  <GlassSurface
+                    width="auto"
+                    height={60}
+                    borderRadius={30}
+                    brightness={20}
+                    opacity={0.8}
+                    className="min-w-48"
                   >
-                    Student Links
-                  </motion.button>
+                    <motion.button
+                      onClick={handleStudentClick}
+                      className="w-full h-full px-8 py-4 text-white font-semibold text-lg"
+                      style={{ pointerEvents: 'auto' }}
+                      whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
+                      whileTap={isMobile ? {} : { scale: 0.98 }}
+                    >
+                      Student Links
+                    </motion.button>
+                  </GlassSurface>
 
-                  <motion.button
-                    onClick={handleTeacherClick}
-                    className={`px-8 py-4 rounded-full text-white font-semibold text-lg ${isMobile ? 'bg-white/15 hover-disabled mobile-optimized' : 'bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors duration-200'}`}
-                    style={{ pointerEvents: 'auto' }}
-                    whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
-                    whileTap={isMobile ? {} : { scale: 0.98 }}
+                  <GlassSurface
+                    width="auto"
+                    height={60}
+                    borderRadius={30}
+                    brightness={20}
+                    opacity={0.8}
+                    className="min-w-48"
                   >
-                    Teacher Links
-                  </motion.button>
+                    <motion.button
+                      onClick={handleTeacherClick}
+                      className="w-full h-full px-8 py-4 text-white font-semibold text-lg"
+                      style={{ pointerEvents: 'auto' }}
+                      whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
+                      whileTap={isMobile ? {} : { scale: 0.98 }}
+                    >
+                      Teacher Links
+                    </motion.button>
+                  </GlassSurface>
                 </motion.div>
               </div>
             </motion.div>
