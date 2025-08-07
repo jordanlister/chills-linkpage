@@ -44,6 +44,30 @@ body {
 
 * {
   transition: opacity 0.3s ease;
+  /* Prevent tap highlights on iOS */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Re-enable text selection where needed */
+input, textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .hover-disabled {
+    transition: none !important;
+  }
+  
+  .hover-disabled:hover {
+    background-color: inherit !important;
+    color: inherit !important;
+    transform: none !important;
+  }
 }
 
 /* Prevent any scrollbar */

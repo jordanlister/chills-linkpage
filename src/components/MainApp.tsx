@@ -138,52 +138,52 @@ export default function MainApp() {
             <motion.div
               key="home"
               className="min-h-screen flex items-center justify-center pb-24"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: isMobile ? 10 : 0, scale: isMobile ? 1 : 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: isMobile ? -10 : 0, scale: isMobile ? 1 : 0.9 }}
+              transition={{ duration: isMobile ? 0.3 : 0.6 }}
             >
               <div className="text-center px-4">
                 <motion.h1
                   className="text-6xl md:text-8xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.6 }}
+                  transition={{ delay: isMobile ? 0.05 : 0.1, duration: isMobile ? 0.3 : 0.6 }}
                 >
                   CHILLS
                 </motion.h1>
                 
                 <motion.p
                   className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                  transition={{ delay: isMobile ? 0.1 : 0.2, duration: isMobile ? 0.3 : 0.6 }}
                 >
                   Access your dance camp videos
                 </motion.p>
 
                 <motion.div
                   className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
+                  transition={{ delay: isMobile ? 0.15 : 0.3, duration: isMobile ? 0.3 : 0.6 }}
                 >
                   <motion.button
                     onClick={handleStudentClick}
-                    className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 px-8 py-4 rounded-full text-white font-semibold text-lg transition-all duration-300"
+                    className={`bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-full text-white font-semibold text-lg transition-colors duration-200 ${isMobile ? 'hover-disabled' : 'hover:bg-white/20'}`}
                     style={{ pointerEvents: 'auto' }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     Student Links
                   </motion.button>
 
                   <motion.button
                     onClick={handleTeacherClick}
-                    className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 px-8 py-4 rounded-full text-white font-semibold text-lg transition-all duration-300"
+                    className={`bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-full text-white font-semibold text-lg transition-colors duration-200 ${isMobile ? 'hover-disabled' : 'hover:bg-white/20'}`}
                     style={{ pointerEvents: 'auto' }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={isMobile ? {} : { scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     Teacher Links
                   </motion.button>
@@ -196,23 +196,23 @@ export default function MainApp() {
             <motion.div
               key="students"
               className="min-h-screen py-12 px-4 pb-24"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: isMobile ? 10 : 0, scale: isMobile ? 1 : 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: isMobile ? -10 : 0, scale: isMobile ? 1 : 0.9 }}
+              transition={{ duration: isMobile ? 0.3 : 0.6 }}
             >
               <div className="max-w-6xl mx-auto">
                 <motion.div
                   className="text-center mb-12"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.6 }}
+                  transition={{ delay: isMobile ? 0.05 : 0.1, duration: isMobile ? 0.3 : 0.6 }}
                 >
                   <motion.button
                     onClick={handleBackToHome}
-                    className="text-white/70 hover:text-white flex items-center gap-2 transition-colors mb-8 mx-auto"
+                    className={`text-white/70 flex items-center gap-2 transition-colors mb-8 mx-auto ${isMobile ? 'hover-disabled' : 'hover:text-white'}`}
                     style={{ pointerEvents: 'auto' }}
-                    whileHover={{ x: -5 }}
+                    whileHover={isMobile ? {} : { x: -5 }}
                   >
                     ← Back to Home
                   </motion.button>
@@ -244,9 +244,9 @@ export default function MainApp() {
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 group w-48 flex-shrink-0"
+                          className={`block bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transition-colors duration-200 group w-48 flex-shrink-0 ${isMobile ? 'hover-disabled' : 'hover:bg-white/20'}`}
                           style={{ pointerEvents: 'auto' }}
-                          whileHover={{ scale: 1.02, y: -5 }}
+                          whileHover={isMobile ? {} : { scale: 1.02, y: -5 }}
                           whileTap={{ scale: 0.98 }}
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
@@ -257,8 +257,8 @@ export default function MainApp() {
                               {day}
                             </div>
                             <motion.div
-                              className="text-white/60 group-hover:text-white transition-colors"
-                              whileHover={{ rotate: 45 }}
+                              className={`text-white/60 transition-colors ${isMobile ? 'hover-disabled' : 'group-hover:text-white'}`}
+                              whileHover={isMobile ? {} : { rotate: 45 }}
                             >
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
@@ -266,7 +266,7 @@ export default function MainApp() {
                             </motion.div>
                           </div>
                           
-                          <h3 className="text-white font-semibold text-sm mb-2 group-hover:text-pink-300 transition-colors leading-tight">
+                          <h3 className={`text-white font-semibold text-sm mb-2 transition-colors leading-tight ${isMobile ? 'hover-disabled' : 'group-hover:text-pink-300'}`}>
                             {item.class.split('-').map(part => part.trim()).join(' • ')}
                           </h3>
                         </motion.a>
@@ -282,10 +282,10 @@ export default function MainApp() {
             <motion.div
               key="teacher-auth"
               className="min-h-screen flex items-center justify-center px-4 pb-24"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: isMobile ? 10 : 0, scale: isMobile ? 1 : 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: isMobile ? -10 : 0, scale: isMobile ? 1 : 0.9 }}
+              transition={{ duration: isMobile ? 0.3 : 0.6 }}
             >
               <motion.div
                 className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 max-w-md w-full"
@@ -295,9 +295,9 @@ export default function MainApp() {
               >
                 <motion.button
                   onClick={handleBackToHome}
-                  className="text-white/70 hover:text-white flex items-center gap-2 transition-colors mb-6"
+                  className={`text-white/70 flex items-center gap-2 transition-colors mb-6 ${isMobile ? 'hover-disabled' : 'hover:text-white'}`}
                   style={{ pointerEvents: 'auto' }}
-                  whileHover={{ x: -5 }}
+                  whileHover={isMobile ? {} : { x: -5 }}
                 >
                   ← Back to Home
                 </motion.button>
@@ -331,9 +331,9 @@ export default function MainApp() {
 
                   <motion.button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 px-6 py-3 rounded-lg text-white font-semibold transition-all duration-200"
+                    className={`w-full bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-3 rounded-lg text-white font-semibold transition-colors duration-200 ${isMobile ? 'hover-disabled' : 'hover:from-blue-600 hover:to-indigo-700'}`}
                     style={{ pointerEvents: 'auto' }}
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={isMobile ? {} : { scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     Access Teacher Links
@@ -347,33 +347,33 @@ export default function MainApp() {
             <motion.div
               key="teachers"
               className="min-h-screen py-12 px-4 pb-24"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: isMobile ? 10 : 0, scale: isMobile ? 1 : 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: isMobile ? -10 : 0, scale: isMobile ? 1 : 0.9 }}
+              transition={{ duration: isMobile ? 0.3 : 0.6 }}
             >
               <div className="max-w-6xl mx-auto">
                 <motion.div
                   className="text-center mb-12"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.6 }}
+                  transition={{ delay: isMobile ? 0.05 : 0.1, duration: isMobile ? 0.3 : 0.6 }}
                 >
                   <div className="flex justify-between items-center mb-8">
                     <motion.button
                       onClick={handleBackToHome}
-                      className="text-white/70 hover:text-white flex items-center gap-2 transition-colors"
+                      className={`text-white/70 flex items-center gap-2 transition-colors ${isMobile ? 'hover-disabled' : 'hover:text-white'}`}
                       style={{ pointerEvents: 'auto' }}
-                      whileHover={{ x: -5 }}
+                      whileHover={isMobile ? {} : { x: -5 }}
                     >
                       ← Back to Home
                     </motion.button>
                     
                     <motion.button
                       onClick={handleLogout}
-                      className="text-white/70 hover:text-white text-sm transition-colors"
+                      className={`text-white/70 text-sm transition-colors ${isMobile ? 'hover-disabled' : 'hover:text-white'}`}
                       style={{ pointerEvents: 'auto' }}
-                      whileHover={{ scale: 1.05 }}
+                      whileHover={isMobile ? {} : { scale: 1.05 }}
                     >
                       Logout
                     </motion.button>
@@ -406,9 +406,9 @@ export default function MainApp() {
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 group w-48 flex-shrink-0"
+                          className={`block bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transition-colors duration-200 group w-48 flex-shrink-0 ${isMobile ? 'hover-disabled' : 'hover:bg-white/20'}`}
                           style={{ pointerEvents: 'auto' }}
-                          whileHover={{ scale: 1.02, y: -5 }}
+                          whileHover={isMobile ? {} : { scale: 1.02, y: -5 }}
                           whileTap={{ scale: 0.98 }}
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
@@ -419,8 +419,8 @@ export default function MainApp() {
                               {day}
                             </div>
                             <motion.div
-                              className="text-white/60 group-hover:text-white transition-colors"
-                              whileHover={{ rotate: 45 }}
+                              className={`text-white/60 transition-colors ${isMobile ? 'hover-disabled' : 'group-hover:text-white'}`}
+                              whileHover={isMobile ? {} : { rotate: 45 }}
                             >
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
@@ -428,7 +428,7 @@ export default function MainApp() {
                             </motion.div>
                           </div>
                           
-                          <h3 className="text-white font-semibold text-sm mb-2 group-hover:text-blue-300 transition-colors leading-tight">
+                          <h3 className={`text-white font-semibold text-sm mb-2 transition-colors leading-tight ${isMobile ? 'hover-disabled' : 'group-hover:text-blue-300'}`}>
                             {item.class.split('-').map(part => part.trim()).join(' • ')}
                           </h3>
                         </motion.a>
