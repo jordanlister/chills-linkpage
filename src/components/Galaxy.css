@@ -1,7 +1,7 @@
 .galaxy-container {
   width: 100vw;
-  height: 300vh;
-  min-height: 300vh;
+  height: 500vh;
+  min-height: 500vh;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -11,8 +11,8 @@
 
 .galaxy-container canvas {
   width: 100vw !important;
-  height: 300vh !important;
-  min-height: 300vh !important;
+  height: 500vh !important;
+  min-height: 500vh !important;
   display: block;
   background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
   mix-blend-mode: normal;

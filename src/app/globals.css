@@ -49,7 +49,21 @@ body::before {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 500vh;
+  min-height: 500vh;
   background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
   z-index: -2;
+}
+
+/* Additional fallback for any potential gaps */
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 500vh;
+  min-height: 500vh;
+  background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #312e81 100%);
+  z-index: -3;
 }
